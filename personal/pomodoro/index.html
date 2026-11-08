@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Simple Pomo.</title>
+   <link rel="stylesheet" href="./styles.css">
+   <link rel="preconnect" href="https://fonts.googleapis.com">
+   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+   <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+</head>
+<body>
+   <div class="app">
+      <nav>
+         <h1>Simple Pomo.</h1>
+         <button class="settings">
+            <span class="front">
+               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-settings preview-icon">
+                  <path d="M9.671 4.136a2.34 2.34 0 0 1 4.659 0 2.34 2.34 0 0 0 3.319 1.915 2.34 2.34 0 0 1 2.33 4.033 2.34 2.34 0 0 0 0 3.831 2.34 2.34 0 0 1-2.33 4.033 2.34 2.34 0 0 0-3.319 1.915 2.34 2.34 0 0 1-4.659 0 2.34 2.34 0 0 0-3.32-1.915 2.34 2.34 0 0 1-2.33-4.033 2.34 2.34 0 0 0 0-3.831A2.34 2.34 0 0 1 6.35 6.051a2.34 2.34 0 0 0 3.319-1.915"/>
+                  <circle cx="12" cy="12" r="3"/>
+                  </svg>
+            </span>
+         </button>
+      </nav>
+      <div class="timer">
+         <p>25:00</p>
+      </div>
+      <div class="controls">
+         <button class="start-pause">
+            <span class="front">Start</span>
+         </button>
+      </div>
+   </div>
+   <div id="settings">
+      <div>
+         <h2>Timer Length's</h2>
+         <label for="focus-timer">Focus Timer</label>
+         <input id="focus-timer" type="number" min="1" max="60">
+      </div>
+   </div>
+   <script src="./js/timer.js"></script>
+</body>
+</html>
