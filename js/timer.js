@@ -3,6 +3,9 @@ const doc = document;
 const timer = doc.querySelector(".timer p");
 const startPauseButton = doc.querySelector("button.start-pause");
 
+let timerFinishStatus = false;
+let stop;
+
 String.prototype.replaceAt = function(replacement, start, end) {
    if (end === undefined) {
       return this.substring(0, start) + replacement;
@@ -11,12 +14,22 @@ String.prototype.replaceAt = function(replacement, start, end) {
    }
 };
 
+function timerFinish(boolean) {
+   if (boolean === true) {
+      timerFinishStatus === true;
+   } else if (boolean === false) {
+      timerFinishStatus === false;
+   };
+   startPauseButton.classList.remove("started");
+   startPauseButton.innerText = "Finished!";
+};
+
 function countDownMinute() {
    // stands for "Index of Semicolon"
    const iSemi = timer.innerHTML.indexOf(":");
    const ones = timer.innerText.slice(1, iSemi);
+   const prevTen = timer.innerText.slice(0, 1);
    if (ones === "0") {
-      const prevTen = timer.innerText.slice(0, 1);
       timer.innerText = timer.innerText.replaceAt(`${prevTen - 1}9`, 0, iSemi);
    } else {
       const prevOne = timer.innerText.slice(1, iSemi);
@@ -27,7 +40,7 @@ function countDownMinute() {
 function countDownSeconds() {
    // stands for "Index of Semicolon"
    const iSemi = timer.innerHTML.indexOf(":");
-   const tens = timer.innerText.slice(iSemi + 1, -1)
+   const tens = timer.innerText.slice(iSemi + 1, -1);
    const ones = timer.innerText.slice(iSemi + 2);
    if (tens === "0" && ones === "0") {
       countDownMinute();
@@ -47,10 +60,14 @@ function countDown(ms, onTick) {
    let id;
 
    function tick() {
-      const now = performance.now();
-      onTick(now - start);
-      expected += ms;
-      id = setTimeout(tick, Math.max(0, expected - now));
+      if (timer.innerText !== "00:00") { 
+         const now = performance.now();
+         onTick(now - start);
+         expected += ms;
+         id = setTimeout(tick, Math.max(0, expected - now));
+      } else {
+         timerFinish("true");
+      };
    };
 
    id = setTimeout(tick, ms);
@@ -58,16 +75,20 @@ function countDown(ms, onTick) {
 };
 
 const onTick = countDownSeconds; 
-let stop;
 
 startPauseButton.addEventListener("click", e => {
    const target = e.target.closest("button");
+   const iSemi = timer.innerText.indexOf(":");
    target.classList.toggle("started");
-   if (target.classList.contains("started")) {
-      target.querySelector("span").innerText = "Pause";
-      stop = countDown(1000, onTick);
+   if (timer.innerText !== "00:00") {
+      if (target.classList.contains("started")) {
+         target.querySelector("span").innerText = "Pause";
+         stop = countDown(1000, onTick);
+      } else {
+         target.querySelector("span").innerText = "Start";
+         stop();
+      };
    } else {
-      target.querySelector("span").innerText = "Start";
-      stop();
-   }
+      // for functions like changing what the button says or acts, etc.,
+   };
 });
