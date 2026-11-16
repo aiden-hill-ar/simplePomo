@@ -3,4 +3,153 @@
    padding: 0;
    box-sizing: border-box;
    font-family: "Inter";
+   color: var(--text);
+}
+
+:root {
+   --blue: oklch(0.6 0.15 262);
+   --light-blue: oklch(0.72 0.14 262);
+
+   --b-white: oklch(from var(--blue) 0.9 0.04 h);
+   --text: oklch(from var(--blue) 0.16 0.05 h);
+
+   --rS: 4px;
+   --rM: 8px;
+
+   --ease-out: cubic-bezier(0.68, 0, 0.13, 1);
+}
+
+body {
+   background-color: var(--blue);
+}
+
+.page {
+   padding: 16px;
+}
+
+input {
+   position: relative;
+   display: block;
+   width: 100%;
+   background: none;
+   border-radius: var(--rS);
+   border: none;
+}
+button {
+   position: relative;
+   background: none;
+   border-radius: var(--rS);
+   border: none;
+   user-select: none;
+   cursor: pointer;
+}
+
+button .shadow,
+button .front {
+   transition: transform 300ms var(--ease-out);
+}
+button .shadow {
+   position: absolute;
+   width: 100%;
+   height: 100%;
+   top: 0;
+   left: 0;
+   transform: translateY(3px);
+   filter: blur(1px);
+   background-color: oklch(from var(--b-white) 0.4 0.1 h / 0.5);
+   border-radius: inherit;
+}
+button .edge {
+   position: absolute;
+   width: 100%;
+   height: 100%;
+   top: 0;
+   left: 0;
+   background-color: oklch(from var(--b-white) calc(l - 0.25) c h);
+   border-radius: inherit;
+}
+button .front {
+   position: relative;
+   display: block;
+   width: 5em;
+   transform: translateY(-3px);
+   background-color: var(--b-white);
+   padding: 4px;
+   border-radius: inherit;
+}
+
+button:hover .shadow,
+button:hover .front {
+   transition: transform 200ms var(--ease-out);
+}
+button:hover .shadow {
+   transform: translateY(4px);
+}
+button:hover .front {
+   transform: translateY(-4px);
+}
+
+button:active .shadow,
+button:active .front {
+   transition: transform 100ms var(--ease-out);
+}
+button:active .shadow {
+   transform: translateY(2px);
+}
+button:active .front {
+   transform: translateY(-2px);
+}
+
+.app {
+   max-width: 500px;
+   margin: 0 auto;
+}
+
+nav {
+   display: flex;
+   justify-content: space-between;
+}
+nav h1 {
+   font-size: 1.5rem;
+   font-weight: 600;
+}
+
+.main {
+   display: flex;
+   flex-direction: column;
+   gap: 8px;
+   background-color: var(--light-blue);
+   padding: 16px;
+   margin: 24px auto;
+   border-radius: var(--rM);
+}
+
+.timer,
+.controls {
+   display: flex;
+   justify-content: center;
+}
+
+.timer {
+   font-size: 3rem;
+   font-weight: 600;
+}
+
+button.start-pause {
+   font-size: 1rem;
+}
+
+#settings {
+   display: none;
+   background-color: var(--light-blue);
+   max-width: 500px;
+   margin: 16px auto 0;
+   border-top: 2px solid var(--blue);
+   padding: 16px;
+}
+#settings.active {
+   display: block;
+}
+#settings h2 {
+   margin-bottom: 8px;
 }

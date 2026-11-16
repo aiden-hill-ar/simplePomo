@@ -14,14 +14,9 @@ String.prototype.replaceAt = function(replacement, start, end) {
    }
 };
 
-function timerFinish(boolean) {
-   if (boolean === true) {
-      timerFinishStatus === true;
-   } else if (boolean === false) {
-      timerFinishStatus === false;
-   };
+function timerFinish() {
    startPauseButton.classList.remove("started");
-   startPauseButton.innerText = "Finished!";
+   startPauseButton.querySelector(".front p").innerText = "Finished!";
 };
 
 function countDownMinute() {
@@ -66,7 +61,7 @@ function countDown(ms, onTick) {
          expected += ms;
          id = setTimeout(tick, Math.max(0, expected - now));
       } else {
-         timerFinish("true");
+         timerFinish();
       };
    };
 
@@ -82,10 +77,10 @@ startPauseButton.addEventListener("click", e => {
    target.classList.toggle("started");
    if (timer.innerText !== "00:00") {
       if (target.classList.contains("started")) {
-         target.querySelector("span").innerText = "Pause";
+         target.querySelector(".front p").innerText = "Pause";
          stop = countDown(1000, onTick);
       } else {
-         target.querySelector("span").innerText = "Start";
+         target.querySelector(".front p").innerText = "Start";
          stop();
       };
    } else {
